@@ -53,6 +53,8 @@ export interface AdvancedToolbarSettings {
 	}[];
 	tooltips: boolean;
 	heightOffset: number;
+	floatingToolbar: boolean; 
+	// Added property for floating toolbar
 }
 
 export interface Tab {
