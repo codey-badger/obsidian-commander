@@ -40,24 +40,6 @@ function render(containerEl: HTMLElement, plugin: CommanderPlugin) {
 				})
 		);
 
-
-	new Setting(containerEl)
-        .setName("Enable Floating Toolbar")
-        .setDesc(
-            "Enable a floating toolbar that attaches when the keyboard layout changes to floating."
-        )
-        .addToggle((cb) =>
-            cb
-                .setValue(plugin.settings.advancedToolbar.floatingToolbar)
-                .onChange(async (value) => {
-                    plugin.settings.advancedToolbar.floatingToolbar = value;
-                    await plugin.saveSettings();
-                    updateStyles(plugin.settings.advancedToolbar);
-                })
-        );
-
-    // ... (other settings remain the same)
-
 	// new Setting(containerEl)
 	// 	.setName("Show Tooltips for Quick Actions")
 	// 	.setDesc("Show Tooltips over the Quick Actions on hover. This helps to more easily identify Commands. IMPORTANT: Only works with a Stylus/Apple Pen/Mouse")
@@ -85,7 +67,20 @@ function render(containerEl: HTMLElement, plugin: CommanderPlugin) {
 					updateStyles(plugin.settings.advancedToolbar);
 				})
 		);
-
+	
+	new Setting(containerEl)
+        .setName("Floating Toolbar")
+        .setDesc("Enable the floating toolbar when the keyboard is in floating layout.")
+        .addToggle((cb) =>
+            cb
+                .setValue(plugin.settings.advancedToolbar.floatingToolbar)
+                .onChange(async (value) => {
+                    plugin.settings.advancedToolbar.floatingToolbar = value;
+                    await plugin.saveSettings();
+                    updateStyles(plugin.settings.advancedToolbar);
+                })
+        );
+	
 	if (Platform.isMobile) {
 		const description = document.createDocumentFragment();
 		description.appendChild(createEl("h3", { text: "Custom Icons" }));
